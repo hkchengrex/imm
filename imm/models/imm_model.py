@@ -87,7 +87,7 @@ def colorize_landmark_maps(maps):
   # get n colors:
   colors = utils.get_n_colors(n_maps, pastel_factor=0.0)
   hmaps = [tf.expand_dims(maps[..., i], axis=3) * np.reshape(colors[i], [1, 1, 1, 3])
-           for i in xrange(n_maps)]
+           for i in range(n_maps)]
   return tf.reduce_max(hmaps, axis=0)
 
 

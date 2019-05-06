@@ -112,7 +112,10 @@ class TPSDataset(ImagePairDataset):
 
   def _get_ordered_stream(self):
     for i in range(len(self._images)):
-      yield self._get_image(i)
+      try:
+        yield self._get_image(i)
+      except StopIteration:
+        return
 
 
   def sample_image_pair(self):
@@ -125,7 +128,10 @@ class TPSDataset(ImagePairDataset):
       max_samples = self._max_samples
     i_samp = 0
     while i_samp < max_samples:
-      yield f_sample()
+      try:
+        yield f_sample()
+      except StopIteration:
+        return
       if self._max_samples is not None:
           i_samp += 1
 

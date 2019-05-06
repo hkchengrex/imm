@@ -141,10 +141,11 @@ def main(args):
 
     if hasattr(train_config, 'max_test_samples'):
       raise ValueError('max_test_samples attribute deprecated')
-    test_dset = dset_class(train_config.datadir, subset=test_subset,
-                           **test_dset_params)
-    test_dset = test_dset.get_dataset(batch_size, repeat=False, shuffle=False,
-                                      num_preprocess_threads=12)
+    # test_dset = dset_class(train_config.datadir, subset=test_subset,
+    #                        **test_dset_params)
+    # test_dset = test_dset.get_dataset(batch_size, repeat=False, shuffle=False,
+    #                                   num_preprocess_threads=12)
+    test_dset = None
 
     # set up inputs
     training_pl = tf.placeholder(tf.bool)

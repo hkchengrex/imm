@@ -125,7 +125,7 @@ def merge_tensors(ts_split, axis=0):
   Merge a nested structure of tensors TS, along the dimension DIM.
   """
   ts_flat = [nest.flatten(si) for si in ts_split]
-  ts_merged = [tf.concat([s[i] for i in xrange(len(ts_flat))], axis=dim) for s in ts_flat]
+  ts_merged = [tf.concat([s[i] for i in range(len(ts_flat))], axis=dim) for s in ts_flat]
   return nest.pack_sequence_as(ts_split[0], ts_merged)
 
 # def dedup(t,v):
@@ -258,7 +258,7 @@ def generate_new_color(existing_colors,pastel_factor = 0.5):
 
 def get_n_colors(n, pastel_factor=0.9):
   colors = []
-  for i in xrange(n):
+  for i in range(n):
     colors.append(generate_new_color(colors,pastel_factor = 0.9))
   return colors
 

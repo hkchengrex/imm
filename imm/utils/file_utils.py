@@ -149,7 +149,7 @@ def extract_frames_from_video(vid_fname, frame_ids=[], frame_hw=None):
   pipe = sp.Popen(cmd, shell=True, stdout=sp.PIPE, bufsize=10**8)
   n_frames = len(frame_ids)
   frames = np.zeros((n_frames, frame_hw[0], frame_hw[1], 3), dtype=np.uint8)
-  for i in xrange(len(frame_ids)):
+  for i in range(len(frame_ids)):
     raw_image = pipe.stdout.read(frame_hw[0]*frame_hw[1]*3)
     im = np.fromstring(raw_image, dtype='uint8')
     frames[i,...] = im.reshape((frame_hw[0], frame_hw[1], 3))
@@ -157,7 +157,7 @@ def extract_frames_from_video(vid_fname, frame_ids=[], frame_hw=None):
   return frames
 
 def get_random_name(len=32):
-  return ''.join([random.choice(string.ascii_letters + string.digits) for _ in xrange(len)])
+  return ''.join([random.choice(string.ascii_letters + string.digits) for _ in range(len)])
 
 # removes restrictions on subprocessing.map:
 # ref: https://stackoverflow.com/questions/3288595/multiprocessing-how-to-use-pool-map-on-a-function-defined-in-a-class

@@ -136,7 +136,7 @@ def train_multi(opts,graph,optim,inputs, training_pl, model_factory,global_step,
     tower_grads = []
     losses = []
     with tf.variable_scope(tf.get_variable_scope()):
-      for i in xrange(num_gpus):
+      for i in range(num_gpus):
         with tf.device('/gpu:%d' % opts['gpu_ids'][i]):
           # note: A NAME_SCOPE only affects the names of OPS
           #       and not of variables:
@@ -411,7 +411,7 @@ def train_loop(opts, graph, loss, train_dataset, training_pl, handle_pl, train_o
       if reset_global_step >= 0:
         print(colorize('Setting global-step to %d.'%reset_global_step,'red',bold=True))
         var_names = [v.name for v in vars_to_restore]
-        reset_vid = [i for i in xrange(len(var_names)) if 'global_step' in var_names[i]]
+        reset_vid = [i for i in range(len(var_names)) if 'global_step' in var_names[i]]
         if reset_vid:
           vars_to_restore.pop(reset_vid[0])
       print(colorize('vars-to-be-restored:','green',bold=True))
@@ -426,7 +426,7 @@ def train_loop(opts, graph, loss, train_dataset, training_pl, handle_pl, train_o
       if exclude_vars:
         for exclude_var_name in exclude_vars:
           var_names = [v.name for v in vars_to_restore]
-          reset_vid = [i for i in xrange(len(var_names)) if exclude_var_name in var_names[i]]
+          reset_vid = [i for i in range(len(var_names)) if exclude_var_name in var_names[i]]
           if reset_vid:
             vars_to_restore.pop(reset_vid[0])
       restorer = tf.train.Saver(var_list=vars_to_restore)
@@ -442,7 +442,7 @@ def train_loop(opts, graph, loss, train_dataset, training_pl, handle_pl, train_o
     start_step = session.run(global_step)
     # run the training loop:
     begin_time = time.time()
-    for step in xrange(start_step, num_steps):
+    for step in range(int(start_step), num_steps):
       start_time = time.time()
       if fwd_only:  # useful for timing..
         feed_dict = {handle_pl: train_handle, training_pl: False}
